@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cube - Front, Top, Left</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden; /* 防止滚动条 */
+        }
+
+        .scene {
+            perspective: 800px; /* 增加透视效果 */
+            margin-top: 150px; /* 将立方体往下移动 */
+        }
+
+        .cube {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(30deg);
+        }
+
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            opacity: 0.9; /* 稍微透明，增强立体感 */
+        }
+
+        .front {
+            transform: translateZ(100px);
+            background-color: rgba(255, 0, 0, 0.7); /* 前面：红色 */
+        }
+
+        .left {
+            transform: rotateY(-90deg) translateZ(100px);
+            background-color: rgba(255, 255, 0, 0.7); /* 左面：黄色 */
+        }
+
+        .top {
+            transform: rotateX(90deg) translateZ(100px);
+            background-color: rgba(0, 255, 0, 0.7); /* 上面：绿色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="cube">
+            <div class="face front"></div>
+            <div class="face left"></div>
+            <div class="face top"></div>
+        </div>
+    </div>
+</body>
+</html>
