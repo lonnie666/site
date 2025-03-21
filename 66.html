@@ -1,0 +1,80 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloons Example</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #87CEEB;
+        }
+        .balloon {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 设置气球的数量
+        const numberOfBalloons = 10;
+
+        // 创建气球
+        for (let i = 0; i < numberOfBalloons; i++) {
+            createBalloon();
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+
+            // 随机设置气球的初始位置、大小和颜色
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            balloon.style.bottom = '0px';
+            const size = Math.random() * 50 + 20;
+            balloon.style.width = size + 'px';
+            balloon.style.height = size + 'px';
+            balloon.style.backgroundColor = getRandomColor();
+
+            document.body.appendChild(balloon);
+
+            // 让气球飞起来
+            flyBalloon(balloon);
+        }
+
+        function flyBalloon(balloon) {
+            let bottomPosition = 0;
+            const flyInterval = setInterval(() => {
+                bottomPosition += 1;
+                balloon.style.bottom = bottomPosition + 'px';
+
+                // 随机改变气球的大小和颜色
+                if (Math.random() < 0.1) {
+                    const newSize = Math.random() * 50 + 20;
+                    balloon.style.width = newSize + 'px';
+                    balloon.style.height = newSize + 'px';
+                    balloon.style.backgroundColor = getRandomColor();
+                }
+
+                // 当气球飞出屏幕时移除它
+                if (bottomPosition > window.innerHeight) {
+                    clearInterval(flyInterval);
+                    balloon.remove();
+                }
+            }, 20);
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
